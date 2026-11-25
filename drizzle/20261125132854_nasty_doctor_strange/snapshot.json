@@ -1,0 +1,977 @@
+{
+  "type": "base",
+  "version": "9",
+  "dialect": "postgres",
+  "id": "ea7378c0-2e9c-4990-bee9-79ffef71ba48",
+  "prevIds": [
+    "00000000-0000-0000-0000-000000000000"
+  ],
+  "footprints": [
+    {
+      "statementType": "create_enum",
+      "statementTarget": [
+        "enum",
+        "public",
+        "media_type"
+      ],
+      "writes": [
+        "s|enum|public.media_type",
+        "n|enum|public.media_type",
+        "e|enum|public.media_type",
+        "n|type|public.media_type"
+      ],
+      "reads": [
+        "n|sch|public"
+      ]
+    },
+    {
+      "statementType": "create_table",
+      "statementTarget": [
+        "table",
+        "public",
+        "media"
+      ],
+      "writes": [
+        "s|tbl|public.media",
+        "n|tbl|public.media",
+        "e|tbl|public.media",
+        "n|rel|public.media",
+        "n|type|public.media",
+        "n|rel|public.media_pkey"
+      ],
+      "reads": [
+        "n|sch|public",
+        "n|enum|public.media_type"
+      ]
+    },
+    {
+      "statementType": "create_table",
+      "statementTarget": [
+        "table",
+        "public",
+        "playlist_items"
+      ],
+      "writes": [
+        "s|tbl|public.playlist_items",
+        "n|tbl|public.playlist_items",
+        "e|tbl|public.playlist_items",
+        "n|rel|public.playlist_items",
+        "n|type|public.playlist_items",
+        "n|rel|public.playlist_items_pkey"
+      ],
+      "reads": [
+        "n|sch|public"
+      ]
+    },
+    {
+      "statementType": "create_table",
+      "statementTarget": [
+        "table",
+        "public",
+        "playlists"
+      ],
+      "writes": [
+        "s|tbl|public.playlists",
+        "n|tbl|public.playlists",
+        "e|tbl|public.playlists",
+        "n|rel|public.playlists",
+        "n|type|public.playlists",
+        "n|rel|public.playlists_pkey",
+        "n|rel|public.pl_nome_unico"
+      ],
+      "reads": [
+        "n|sch|public"
+      ]
+    },
+    {
+      "statementType": "create_table",
+      "statementTarget": [
+        "table",
+        "public",
+        "user_review"
+      ],
+      "writes": [
+        "s|tbl|public.user_review",
+        "n|tbl|public.user_review",
+        "e|tbl|public.user_review",
+        "n|rel|public.user_review",
+        "n|type|public.user_review",
+        "n|rel|public.user_review_pkey",
+        "n|rel|public.user_titles_user_title_unique"
+      ],
+      "reads": [
+        "n|sch|public"
+      ]
+    },
+    {
+      "statementType": "create_table",
+      "statementTarget": [
+        "table",
+        "public",
+        "usuario"
+      ],
+      "writes": [
+        "s|tbl|public.usuario",
+        "n|tbl|public.usuario",
+        "e|tbl|public.usuario",
+        "n|rel|public.usuario",
+        "n|type|public.usuario",
+        "n|rel|public.usuario_pkey",
+        "n|rel|public.usuario_email_key"
+      ],
+      "reads": [
+        "n|sch|public"
+      ]
+    },
+    {
+      "statementType": "create_index",
+      "statementTarget": [
+        "index",
+        "public",
+        "media",
+        "media_usr_tmdb_type_idx"
+      ],
+      "writes": [
+        "s|idx|public.media_usr_tmdb_type_idx",
+        "n|idx|public.media_usr_tmdb_type_idx",
+        "e|idx|public.media_usr_tmdb_type_idx",
+        "n|rel|public.media_usr_tmdb_type_idx"
+      ],
+      "reads": [
+        "n|tbl|public.media",
+        "n|sch|public",
+        "n|col|public.media.tmdb_id",
+        "n|col|public.media.media_type"
+      ]
+    },
+    {
+      "statementType": "create_index",
+      "statementTarget": [
+        "index",
+        "public",
+        "playlist_items",
+        "playlist_titles_title_id_idx"
+      ],
+      "writes": [
+        "s|idx|public.playlist_titles_title_id_idx",
+        "n|idx|public.playlist_titles_title_id_idx",
+        "e|idx|public.playlist_titles_title_id_idx",
+        "n|rel|public.playlist_titles_title_id_idx"
+      ],
+      "reads": [
+        "n|tbl|public.playlist_items",
+        "n|sch|public",
+        "n|col|public.playlist_items.media_item_id"
+      ]
+    },
+    {
+      "statementType": "create_fk",
+      "statementTarget": [
+        "table",
+        "public",
+        "media"
+      ],
+      "writes": [
+        "s|fk|public.media.media_id_usuario_usuario_id_fkey",
+        "n|fk|public.media.media_id_usuario_usuario_id_fkey",
+        "e|fk|public.media.media_id_usuario_usuario_id_fkey",
+        "n|con|public.media.media_id_usuario_usuario_id_fkey"
+      ],
+      "reads": [
+        "n|tbl|public.media",
+        "n|sch|public",
+        "n|tbl|public.usuario",
+        "n|sch|public",
+        "n|col|public.media.id_usuario",
+        "n|col|public.usuario.id",
+        "e|uniqueness|public.usuario.id"
+      ]
+    },
+    {
+      "statementType": "create_fk",
+      "statementTarget": [
+        "table",
+        "public",
+        "playlist_items"
+      ],
+      "writes": [
+        "s|fk|public.playlist_items.playlist_items_playlist_id_playlists_id_fkey",
+        "n|fk|public.playlist_items.playlist_items_playlist_id_playlists_id_fkey",
+        "e|fk|public.playlist_items.playlist_items_playlist_id_playlists_id_fkey",
+        "n|con|public.playlist_items.playlist_items_playlist_id_playlists_id_fkey"
+      ],
+      "reads": [
+        "n|tbl|public.playlist_items",
+        "n|sch|public",
+        "n|tbl|public.playlists",
+        "n|sch|public",
+        "n|col|public.playlist_items.playlist_id",
+        "n|col|public.playlists.id",
+        "e|uniqueness|public.playlists.id"
+      ]
+    },
+    {
+      "statementType": "create_fk",
+      "statementTarget": [
+        "table",
+        "public",
+        "playlist_items"
+      ],
+      "writes": [
+        "s|fk|public.playlist_items.playlist_items_media_item_id_media_id_fkey",
+        "n|fk|public.playlist_items.playlist_items_media_item_id_media_id_fkey",
+        "e|fk|public.playlist_items.playlist_items_media_item_id_media_id_fkey",
+        "n|con|public.playlist_items.playlist_items_media_item_id_media_id_fkey"
+      ],
+      "reads": [
+        "n|tbl|public.playlist_items",
+        "n|sch|public",
+        "n|tbl|public.media",
+        "n|sch|public",
+        "n|col|public.playlist_items.media_item_id",
+        "n|col|public.media.id",
+        "e|uniqueness|public.media.id"
+      ]
+    },
+    {
+      "statementType": "create_fk",
+      "statementTarget": [
+        "table",
+        "public",
+        "playlists"
+      ],
+      "writes": [
+        "s|fk|public.playlists.playlists_user_id_usuario_id_fkey",
+        "n|fk|public.playlists.playlists_user_id_usuario_id_fkey",
+        "e|fk|public.playlists.playlists_user_id_usuario_id_fkey",
+        "n|con|public.playlists.playlists_user_id_usuario_id_fkey"
+      ],
+      "reads": [
+        "n|tbl|public.playlists",
+        "n|sch|public",
+        "n|tbl|public.usuario",
+        "n|sch|public",
+        "n|col|public.playlists.user_id",
+        "n|col|public.usuario.id",
+        "e|uniqueness|public.usuario.id"
+      ]
+    },
+    {
+      "statementType": "create_fk",
+      "statementTarget": [
+        "table",
+        "public",
+        "user_review"
+      ],
+      "writes": [
+        "s|fk|public.user_review.user_review_media_id_media_id_fkey",
+        "n|fk|public.user_review.user_review_media_id_media_id_fkey",
+        "e|fk|public.user_review.user_review_media_id_media_id_fkey",
+        "n|con|public.user_review.user_review_media_id_media_id_fkey"
+      ],
+      "reads": [
+        "n|tbl|public.user_review",
+        "n|sch|public",
+        "n|tbl|public.media",
+        "n|sch|public",
+        "n|col|public.user_review.media_id",
+        "n|col|public.media.id",
+        "e|uniqueness|public.media.id"
+      ]
+    },
+    {
+      "statementType": "create_fk",
+      "statementTarget": [
+        "table",
+        "public",
+        "user_review"
+      ],
+      "writes": [
+        "s|fk|public.user_review.user_review_id_usuario_usuario_id_fkey",
+        "n|fk|public.user_review.user_review_id_usuario_usuario_id_fkey",
+        "e|fk|public.user_review.user_review_id_usuario_usuario_id_fkey",
+        "n|con|public.user_review.user_review_id_usuario_usuario_id_fkey"
+      ],
+      "reads": [
+        "n|tbl|public.user_review",
+        "n|sch|public",
+        "n|tbl|public.usuario",
+        "n|sch|public",
+        "n|col|public.user_review.id_usuario",
+        "n|col|public.usuario.id",
+        "e|uniqueness|public.usuario.id"
+      ]
+    }
+  ],
+  "ddl": [
+    {
+      "schema": "public",
+      "name": "media",
+      "isRlsEnabled": false,
+      "entityType": "tables"
+    },
+    {
+      "schema": "public",
+      "name": "playlist_items",
+      "isRlsEnabled": false,
+      "entityType": "tables"
+    },
+    {
+      "schema": "public",
+      "name": "playlists",
+      "isRlsEnabled": false,
+      "entityType": "tables"
+    },
+    {
+      "schema": "public",
+      "name": "user_review",
+      "isRlsEnabled": false,
+      "entityType": "tables"
+    },
+    {
+      "schema": "public",
+      "name": "usuario",
+      "isRlsEnabled": false,
+      "entityType": "tables"
+    },
+    {
+      "schema": "public",
+      "name": "media_type",
+      "values": [
+        "movie",
+        "tv"
+      ],
+      "entityType": "enums"
+    },
+    {
+      "schema": "public",
+      "table": "media",
+      "name": "id",
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "media",
+      "name": "id_usuario",
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "media",
+      "name": "tmdb_id",
+      "type": "integer",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "media",
+      "name": "media_type",
+      "type": "media_type",
+      "typeSchema": "public",
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "media",
+      "name": "titulo",
+      "type": "varchar(255)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "playlist_items",
+      "name": "playlist_id",
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "playlist_items",
+      "name": "media_item_id",
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "playlist_items",
+      "name": "added_at",
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "playlists",
+      "name": "id",
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "playlists",
+      "name": "user_id",
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "playlists",
+      "name": "nome",
+      "type": "varchar(80)",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "playlists",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "playlists",
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "user_review",
+      "name": "id",
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "user_review",
+      "name": "media_id",
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "user_review",
+      "name": "id_usuario",
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "user_review",
+      "name": "fav",
+      "type": "boolean",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "false",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "user_review",
+      "name": "assistido",
+      "type": "boolean",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "false",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "user_review",
+      "name": "nota",
+      "type": "smallint",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "user_review",
+      "name": "aval_titulo",
+      "type": "varchar(160)",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "user_review",
+      "name": "aval_texto",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": false,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "user_review",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "user_review",
+      "name": "updated_at",
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "usuario",
+      "name": "id",
+      "type": "uuid",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "gen_random_uuid()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "usuario",
+      "name": "email",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "usuario",
+      "name": "password_hash",
+      "type": "text",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": null,
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "usuario",
+      "name": "created_at",
+      "type": "timestamp with time zone",
+      "typeSchema": null,
+      "notNull": true,
+      "dimensions": 0,
+      "default": "now()",
+      "generated": null,
+      "identity": null,
+      "entityType": "columns"
+    },
+    {
+      "schema": "public",
+      "table": "media",
+      "name": "media_usr_tmdb_type_idx",
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "tmdb_id",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        },
+        {
+          "value": "media_type",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": true,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "concurrently": false,
+      "entityType": "indexes"
+    },
+    {
+      "schema": "public",
+      "table": "playlist_items",
+      "name": "playlist_titles_title_id_idx",
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "media_item_id",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "concurrently": false,
+      "entityType": "indexes"
+    },
+    {
+      "schema": "public",
+      "table": "media",
+      "name": "media_id_usuario_usuario_id_fkey",
+      "nameExplicit": false,
+      "columns": [
+        "id_usuario"
+      ],
+      "schemaTo": "public",
+      "tableTo": "usuario",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "entityType": "fks"
+    },
+    {
+      "schema": "public",
+      "table": "playlist_items",
+      "name": "playlist_items_playlist_id_playlists_id_fkey",
+      "nameExplicit": false,
+      "columns": [
+        "playlist_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "playlists",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "entityType": "fks"
+    },
+    {
+      "schema": "public",
+      "table": "playlist_items",
+      "name": "playlist_items_media_item_id_media_id_fkey",
+      "nameExplicit": false,
+      "columns": [
+        "media_item_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "media",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "entityType": "fks"
+    },
+    {
+      "schema": "public",
+      "table": "playlists",
+      "name": "playlists_user_id_usuario_id_fkey",
+      "nameExplicit": false,
+      "columns": [
+        "user_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "usuario",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "entityType": "fks"
+    },
+    {
+      "schema": "public",
+      "table": "user_review",
+      "name": "user_review_media_id_media_id_fkey",
+      "nameExplicit": false,
+      "columns": [
+        "media_id"
+      ],
+      "schemaTo": "public",
+      "tableTo": "media",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "entityType": "fks"
+    },
+    {
+      "schema": "public",
+      "table": "user_review",
+      "name": "user_review_id_usuario_usuario_id_fkey",
+      "nameExplicit": false,
+      "columns": [
+        "id_usuario"
+      ],
+      "schemaTo": "public",
+      "tableTo": "usuario",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "CASCADE",
+      "entityType": "fks"
+    },
+    {
+      "schema": "public",
+      "table": "playlist_items",
+      "name": "playlist_items_pkey",
+      "columns": [
+        "playlist_id",
+        "media_item_id"
+      ],
+      "nameExplicit": false,
+      "entityType": "pks"
+    },
+    {
+      "schema": "public",
+      "table": "media",
+      "name": "media_pkey",
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "entityType": "pks"
+    },
+    {
+      "schema": "public",
+      "table": "playlists",
+      "name": "playlists_pkey",
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "entityType": "pks"
+    },
+    {
+      "schema": "public",
+      "table": "user_review",
+      "name": "user_review_pkey",
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "entityType": "pks"
+    },
+    {
+      "schema": "public",
+      "table": "usuario",
+      "name": "usuario_pkey",
+      "columns": [
+        "id"
+      ],
+      "nameExplicit": false,
+      "entityType": "pks"
+    },
+    {
+      "schema": "public",
+      "table": "playlists",
+      "name": "pl_nome_unico",
+      "nameExplicit": true,
+      "columns": [
+        "user_id",
+        "nome"
+      ],
+      "nullsNotDistinct": false,
+      "entityType": "uniques"
+    },
+    {
+      "schema": "public",
+      "table": "user_review",
+      "name": "user_titles_user_title_unique",
+      "nameExplicit": true,
+      "columns": [
+        "id_usuario",
+        "media_id"
+      ],
+      "nullsNotDistinct": false,
+      "entityType": "uniques"
+    },
+    {
+      "schema": "public",
+      "table": "usuario",
+      "name": "usuario_email_key",
+      "nameExplicit": false,
+      "columns": [
+        "email"
+      ],
+      "nullsNotDistinct": false,
+      "entityType": "uniques"
+    },
+    {
+      "schema": "public",
+      "table": "media",
+      "name": "id_positivo",
+      "value": "\"tmdb_id\" > 0",
+      "entityType": "checks"
+    },
+    {
+      "schema": "public",
+      "table": "media",
+      "name": "titulo_nao_nulo",
+      "value": "length(btrim(\"titulo\")) > 0",
+      "entityType": "checks"
+    },
+    {
+      "schema": "public",
+      "table": "playlists",
+      "name": "pl_nome_nao_vazio",
+      "value": "length(btrim(\"nome\")) > 0",
+      "entityType": "checks"
+    },
+    {
+      "schema": "public",
+      "table": "user_review",
+      "name": "user_titles_review_consistency",
+      "value": "(\n        \"aval_titulo\" IS NULL\n        AND \"aval_texto\" IS NULL\n      ) OR (\n        \"nota\" IS NOT NULL\n        AND \"aval_titulo\" IS NOT NULL\n        AND length(btrim(\"aval_titulo\")) > 0\n        AND \"aval_texto\" IS NOT NULL\n        AND length(btrim(\"aval_texto\")) > 0\n      )",
+      "entityType": "checks"
+    },
+    {
+      "schema": "public",
+      "table": "user_review",
+      "name": "user_titles_rating_range",
+      "value": "\"nota\" IS NULL OR \"nota\" BETWEEN 1 AND 10",
+      "entityType": "checks"
+    },
+    {
+      "schema": "public",
+      "table": "user_review",
+      "name": "user_titles_has_interaction",
+      "value": "\"assistido\" OR \"fav\" OR \"nota\" IS NOT NULL",
+      "entityType": "checks"
+    }
+  ]
+}
